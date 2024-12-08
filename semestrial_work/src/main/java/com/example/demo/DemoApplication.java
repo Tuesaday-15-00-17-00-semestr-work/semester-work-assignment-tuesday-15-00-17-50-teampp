@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import javafx.stage.Stage;
+import javafx.application.Application;
 
 @SpringBootApplication
 //@RestController
@@ -14,20 +16,7 @@ public class DemoApplication {
 
 	public static void main(String[] args) {
 
-		SpringApplication.run(DemoApplication.class, args);
+		//SpringApplication.run(DemoApplication.class, args);
+		Application.launch(BookstoreApplication.class, args);
 	}
-	/*
-	@GetMapping
-	public List<User> hello() {
-		return List.of(
-				new User(
-						1,
-						"patopoco",
-						"123",
-						1,
-						"jbmnt"
-				)
-		);
-	}
-	*/
 }
