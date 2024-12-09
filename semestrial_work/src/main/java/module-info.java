@@ -3,6 +3,7 @@ module com.example.demo {
     requires javafx.controls;
     requires javafx.fxml;
 
+
     // Spring Boot modules
     requires spring.boot;
     requires spring.boot.autoconfigure;
@@ -12,6 +13,7 @@ module com.example.demo {
     requires spring.data.jpa;
     requires org.apache.tomcat.embed.core;
     requires jakarta.persistence;
+    requires spring.core;
 
     // Expose your main package to be accessible by other modules
     exports com.example.demo;

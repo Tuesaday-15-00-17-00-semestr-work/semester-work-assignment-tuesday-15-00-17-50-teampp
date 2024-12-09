@@ -95,6 +95,7 @@
 			<version>23.0.1</version> <!-- Same as javafx-controls -->
 		</dependency>
 
+
 	</dependencies>
 
 	<repositories>
