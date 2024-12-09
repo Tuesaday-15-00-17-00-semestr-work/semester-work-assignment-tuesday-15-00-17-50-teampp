@@ -15,6 +15,8 @@ module com.example.demo {
     requires jakarta.persistence;
     requires spring.core;
 
+    opens com.example.demo to javafx.fxml;
+
     // Expose your main package to be accessible by other modules
     exports com.example.demo;
 }

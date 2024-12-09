@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class SceneController {
+public class SceneController2 {
     private Stage stageA;
     private Scene sceneA;
     private Parent root;
@@ -29,21 +29,23 @@ public class SceneController {
 
     String username, password, email;
 
-    public void submit(ActionEvent event) throws IOException {
+    public void submit2(ActionEvent event) throws IOException {
         username = username_textfield.getText();
         password = password_textfield.getText();
+        email = email_textfield.getText();
 
         if(Objects.equals(username, "patopoco") && Objects.equals(password, "patopoco")){
-            SwitchToBookActionsAdmin(event);
+            SwitchToBookActionsUser(event);
         }
     }
 
 
-    public void SwitchToBookActionsAdmin(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/BookActionsAdmin.fxml"));
+    public void SwitchToBookActionsUser(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/BookActionsUser.fxml"));
         stageA = (Stage)((Node)event.getSource()).getScene().getWindow();
         sceneA = new Scene(root);
         stageA.setScene(sceneA);
         stageA.show();
     }
 }
+

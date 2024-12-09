@@ -4,12 +4,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.SceneController2">
    <children>
-      <Button layoutX="57.0" layoutY="287.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="82.0" text="Sing Up" />
-      <TextField layoutX="57.0" layoutY="156.0" promptText="password" />
-      <TextField layoutX="57.0" layoutY="220.0" promptText="email" />
-      <TextField layoutX="57.0" layoutY="89.0" promptText="username" />
+      <Button layoutX="57.0" layoutY="287.0" mnemonicParsing="false" onAction="#submit2" prefHeight="43.0" prefWidth="82.0" text="Sing Up" />
+      <TextField fx:id="password_textfield" layoutX="57.0" layoutY="156.0" promptText="password" />
+      <TextField fx:id="email_textfield" layoutX="57.0" layoutY="220.0" promptText="email" />
+      <TextField fx:id="username_textfield" layoutX="57.0" layoutY="89.0" promptText="username" />
    </children>
 </AnchorPane>
