@@ -36,7 +36,11 @@ public class SceneController {
 
         UsersDat dat  = new UsersDat();
         if(dat.rightPassword(username, password) == 0){
-            SwitchToBookActionsAdmin(event);
+            if(dat.findRole(username) == 0){
+                SwitchToBookActionsAdmin(event);}
+            else{
+                SwitchToBookActionsUser(event);
+            }
         }
         else{
             label.setText("Wrong Username or Wrong Password");
@@ -46,6 +50,14 @@ public class SceneController {
 
     public void SwitchToBookActionsAdmin(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/BookActionsAdmin.fxml"));
+        stageA = (Stage)((Node)event.getSource()).getScene().getWindow();
+        sceneA = new Scene(root);
+        stageA.setScene(sceneA);
+        stageA.show();
+    }
+
+    public void SwitchToBookActionsUser(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/BookActionsUser.fxml"));
         stageA = (Stage)((Node)event.getSource()).getScene().getWindow();
         sceneA = new Scene(root);
         stageA.setScene(sceneA);
