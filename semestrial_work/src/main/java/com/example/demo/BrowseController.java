@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import com.example.demo.book.Book;
+import com.example.demo.book.BooksDat;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,7 +28,10 @@ public class BrowseController {
     public void find(ActionEvent event) throws IOException {
         t = title.getText();
         a = author.getText();
-        
+
+        //BooksDat dat = new BooksDat();
+        //Book book = new Book();
+        //book = dat.findBook(t, a);
 
     }
 

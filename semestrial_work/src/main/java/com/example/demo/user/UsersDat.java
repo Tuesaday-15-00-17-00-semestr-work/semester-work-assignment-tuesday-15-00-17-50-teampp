@@ -1,5 +1,7 @@
 package com.example.demo.user;
 
+import javafx.scene.control.TextField;
+
 import java.sql.*;
 
 public class UsersDat {
@@ -10,9 +12,10 @@ public class UsersDat {
     private static final String DATABASE_PASSWORD = "123456";
     private static final String INSERT_QUERY = "INSERT INTO user (email, password, role, username) VALUES (?, ?, ?, ?)";
     private static final String SELECT_QUERY = "SELECT * FROM user WHERE username = ?";
-    private static final String DELETE_QUERY = "DELETE FROM registration WHERE full_name = ?";
+    private static final String DELETE_QUERY = "DELETE FROM user WHERE username = ?";
     private static final String SELECT_QUERY_P = "SELECT * FROM user WHERE username = ? AND password = ?;";
     private static final String SELECT_ROLE = "SELECT * FROM user WHERE role = ? AND username = ?";
+    private static final String CHANGE_ROLE = "UPDATE user SET role = '1' WHERE username = ?";
 
 
     public void insertRecord(String username, String email, String password) throws SQLException {
@@ -104,6 +107,36 @@ public class UsersDat {
             printSQLException(e);
         }
         return 0;
+    }
+
+    public void deleteUser(String fullName) {
+        try (Connection connection = DriverManager
+                .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+
+
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_QUERY)) {
+            preparedStatement.setString(1, fullName);
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+    }
+
+    public void changeRole(String fullName) {
+        try (Connection connection = DriverManager
+                .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+
+
+             PreparedStatement preparedStatement = connection.prepareStatement(CHANGE_ROLE)) {
+            preparedStatement.setString(1, fullName);
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
     }
 
 
