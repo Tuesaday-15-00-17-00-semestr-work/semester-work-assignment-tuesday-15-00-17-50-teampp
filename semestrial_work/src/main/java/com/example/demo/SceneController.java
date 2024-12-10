@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.user.UsersDat;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Objects;
 
 public class SceneController {
@@ -18,23 +20,26 @@ public class SceneController {
     private Scene sceneA;
     private Parent root;
 
-    //@FXML
-    //private Label label;
+    @FXML
+    private Label label;
     @FXML
     private TextField username_textfield;
     @FXML
     private TextField password_textfield;
-    @FXML
-    private TextField email_textfield;
+
 
     String username, password, email;
 
-    public void submit(ActionEvent event) throws IOException {
+    public void submit(ActionEvent event) throws IOException, SQLException {
         username = username_textfield.getText();
         password = password_textfield.getText();
 
-        if(Objects.equals(username, "patopoco") && Objects.equals(password, "patopoco")){
+        UsersDat dat  = new UsersDat();
+        if(dat.rightPassword(username, password) == 0){
             SwitchToBookActionsAdmin(event);
+        }
+        else{
+            label.setText("Wrong Username or Wrong Password");
         }
     }
 

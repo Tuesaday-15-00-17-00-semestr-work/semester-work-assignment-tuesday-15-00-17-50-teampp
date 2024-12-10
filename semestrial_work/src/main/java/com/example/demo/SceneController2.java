@@ -1,5 +1,10 @@
 package com.example.demo;
 
+import com.example.demo.user.UsersDat;
+import com.example.demo.user.UsersDat;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.example.demo.user.User;
+import com.example.demo.user.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,17 +14,22 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Objects;
 
+@Component
 public class SceneController2 {
     private Stage stageA;
     private Scene sceneA;
     private Parent root;
 
-    //@FXML
-    //private Label label;
+    @FXML
+    private Label label;
     @FXML
     private TextField username_textfield;
     @FXML
@@ -27,16 +37,36 @@ public class SceneController2 {
     @FXML
     private TextField email_textfield;
 
-    String username, password, email;
 
-    public void submit2(ActionEvent event) throws IOException {
+    String username, password, email;
+    int role = 0;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    public void SceneController(UserService userService) {
+        this.userService = userService;
+    }
+
+    public void submit2(ActionEvent event) throws IOException, SQLException {
         username = username_textfield.getText();
         password = password_textfield.getText();
         email = email_textfield.getText();
 
-        if(Objects.equals(username, "patopoco") && Objects.equals(password, "patopoco")){
+
+
+
+        UsersDat dat = new UsersDat();
+        if(dat.findRecord(username) == 1){
+            dat.insertRecord(username, password, email);
             SwitchToBookActionsUser(event);
         }
+        else{
+            label.setText("Username is used");
+        }
+
+
     }
 
 

@@ -19,13 +19,13 @@ public class Book {
     Long book_id;
     String title;
     String author;
-    int isbn;
+    String isbn;
     int available_copies;
 
     public Book() {
     }
 
-    public Book(String title, String author, int isbn, int available_copies) {
+    public Book(String title, String author, String isbn, int available_copies) {
         this.title = title;
         this.author = author;
         this.isbn = isbn;
@@ -56,11 +56,11 @@ public class Book {
         this.author = author;
     }
 
-    public int getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(int isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 

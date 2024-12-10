@@ -10,6 +10,6 @@
       <Button layoutX="56.0" layoutY="284.0" mnemonicParsing="false" onAction="#submit" prefHeight="44.0" prefWidth="82.0" text="Log In" />
       <TextField fx:id="password_textfield" layoutX="56.0" layoutY="222.0" promptText="password" />
       <TextField fx:id="username_textfield" layoutX="56.0" layoutY="174.0" promptText="username" />
-      <Label layoutX="56.0" layoutY="47.0" prefHeight="54.0" prefWidth="172.0" />
+      <Label fx:id="label" layoutX="56.0" layoutY="47.0" prefHeight="54.0" prefWidth="505.0" />
    </children>
 </AnchorPane>

@@ -12,6 +12,8 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    private String username;
+
     @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -29,6 +31,8 @@ public class UserService {
         }
         userRepository.save(user);
     }
+
+
 
     /*
     public List<User> getUsers() {
