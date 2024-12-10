@@ -31,6 +31,7 @@ public class BrowseController {
     private Label available;
 
     String t, a;
+    String value;
     /*
     private ValueToPass valueToPass;
 
@@ -49,14 +50,16 @@ public class BrowseController {
         isbn.setText(book.get(1));
         available.setText(book.get(2));
 
+
     }
 
     public void back(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/BookActionsAdmin.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        if(GlobalData.getInstance().getGlobalValue() == "1"){
+            back_admin(event);
+        }
+        else{
+            back_user(event);
+        }
 
     }
 

@@ -30,7 +30,6 @@ public class SceneController {
 
     String username, password, email;
 
-    String value;
 
 
     public void submit(ActionEvent event) throws IOException, SQLException {
@@ -41,6 +40,7 @@ public class SceneController {
         UsersDat dat  = new UsersDat();
         if(dat.rightPassword(username, password) == 0){
             if(dat.findRole(username) == 0){
+                GlobalData.getInstance().setGlobalValue("1");
                 /*
                 valueToPass.setValue("1");
 
@@ -49,6 +49,7 @@ public class SceneController {
                 SwitchToBookActionsAdmin(event);}
             else{
                 //valueToPass.setValue("0");
+                GlobalData.getInstance().setGlobalValue("0");
                 SwitchToBookActionsUser(event);
             }
         }
