@@ -30,15 +30,25 @@ public class SceneController {
 
     String username, password, email;
 
+    String value;
+
+
     public void submit(ActionEvent event) throws IOException, SQLException {
         username = username_textfield.getText();
         password = password_textfield.getText();
+        //ValueToPass valueToPass = new ValueToPass();
 
         UsersDat dat  = new UsersDat();
         if(dat.rightPassword(username, password) == 0){
             if(dat.findRole(username) == 0){
+                /*
+                valueToPass.setValue("1");
+
+                BrowseController b = new BrowseController(valueToPass);
+                */
                 SwitchToBookActionsAdmin(event);}
             else{
+                //valueToPass.setValue("0");
                 SwitchToBookActionsUser(event);
             }
         }

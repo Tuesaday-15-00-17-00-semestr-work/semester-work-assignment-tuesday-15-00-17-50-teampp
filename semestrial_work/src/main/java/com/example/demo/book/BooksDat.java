@@ -1,9 +1,7 @@
 package com.example.demo.book;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 
 import static com.example.demo.user.UsersDat.printSQLException;
 
@@ -13,11 +11,32 @@ public class BooksDat {
     private static final String DATABASE_USERNAME = "semestralka";
     private static final String DATABASE_PASSWORD = "123456";
     private static final String INSERT_QUERY = "INSERT INTO book (title, author, isbn, available_copies) VALUES (?, ?, ?, ?)";
-    private static final String SELECT_QUERY = "SELECT * FROM registration WHERE full_name = ?";
-    private static final String DELETE_QUERY = "DELETE FROM registration WHERE full_name = ?";
-    private static final String SELECT_QUERY_P = "SELECT * FROM registration WHERE password = ?";
+    private static final String SELECT_QUERY = "SELECT * FROM book WHERE title = ?";
 
+    public ArrayList<String> findBookByTitle(String title) {
+        ArrayList<String> book = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_QUERY)) {
 
+            preparedStatement.setString(1, title);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                //int id = resultSet.getInt("book_id");
+                String bookTitle = resultSet.getString("title");
+                String author = resultSet.getString("author");
+                String isbn = resultSet.getString("isbn");
+                int available = resultSet.getInt("available_copies");
+
+                book.add(author);
+                book.add(isbn);
+                book.add(String.valueOf(available));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return book;
+    }
     public void insertRecord(String title, String author, String isbn, int available_copies) throws SQLException {
 
         // Step 1: Establishing a Connection and

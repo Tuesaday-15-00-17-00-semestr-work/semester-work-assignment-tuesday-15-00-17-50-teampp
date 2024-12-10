@@ -53,13 +53,14 @@ public class SceneController2 {
         username = username_textfield.getText();
         password = password_textfield.getText();
         email = email_textfield.getText();
-
+        //ValueToPass valueToPass = new ValueToPass();
 
 
 
         UsersDat dat = new UsersDat();
         if(dat.findRecord(username) == 1){
             dat.insertRecord(username, password, email);
+            //valueToPass.setValue("0");
             SwitchToBookActionsUser(event);
         }
         else{
