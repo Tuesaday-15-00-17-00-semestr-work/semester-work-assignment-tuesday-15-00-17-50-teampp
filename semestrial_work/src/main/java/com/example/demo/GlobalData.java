@@ -2,18 +2,14 @@ package com.example.demo;
 
 public class GlobalData {
 
-    // Private static instance of the class
     private static GlobalData instance;
 
-    // Your global value (can be any type)
     private String globalValue;
 
-    // Private constructor to prevent instantiation
     private GlobalData() {
-        globalValue = "Default Value"; // Set the initial value
+        globalValue = "Default Value";
     }
 
-    // Public method to get the single instance of the class
     public static GlobalData getInstance() {
         if (instance == null) {
             instance = new GlobalData();

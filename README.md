@@ -41,9 +41,24 @@ Log in: select correct username and password, Sing up: select none existing user
 
 Menu for administrator to choose between actions, user has no administration action
 
+![fx4](fx4.png)
+![fx7](fx7.png)
+![fx8](fx8.png)
+
+Browse a book: you can find book you want and buy it if there is an available copy, the bought book is added to the transaction database.
+If the book doesnt exist the text field informs you about it. It also infroms you when you bought the book succesfully. The available copies are decreased by 1.
+
+![fx5](fx5.png)
+
+Add a book the the available books to find and buy.
+
+![fx6](fx6.png)
+
+Administration: you can make user an administrator or you can delete user from the system
 
 
-Database design: For now I have 3 databases but I am only using two, for books and for users, the database for roles doesnt have impact in my application so I dindt used it. The structure of columns in these databases are as in the semestrial work presentation.
+
+Database design: For now I have 3 databases, for books and for users and for transactions, the database for roles doesnt have impact in my application so I dindt used it. The structure of columns in these databases are as in the semestrial work presentation.
 
 ![Databses](dat.png)
 

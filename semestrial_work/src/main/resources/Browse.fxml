@@ -13,5 +13,7 @@
       <Label fx:id="author" layoutX="300.0" layoutY="56.0" prefHeight="42.0" prefWidth="267.0" />
       <Label fx:id="isbn" layoutX="300.0" layoutY="107.0" prefHeight="42.0" prefWidth="267.0" />
       <Label fx:id="available" layoutX="300.0" layoutY="157.0" prefHeight="42.0" prefWidth="267.0" />
+      <Button layoutX="333.0" layoutY="317.0" mnemonicParsing="false" onAction="#buy" prefHeight="68.0" prefWidth="150.0" text="Buy" />
+      <Label fx:id="bought" layoutX="300.0" layoutY="243.0" prefHeight="30.0" prefWidth="267.0" />
    </children>
 </AnchorPane>

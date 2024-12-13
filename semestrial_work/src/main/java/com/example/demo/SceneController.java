@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.book.GlobalId;
 import com.example.demo.user.UsersDat;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -39,6 +40,8 @@ public class SceneController {
 
         UsersDat dat  = new UsersDat();
         if(dat.rightPassword(username, password) == 0){
+            int user_id = dat.FindId(username);
+            GlobalId.getInstance().setGlobalId(user_id);
             if(dat.findRole(username) == 0){
                 GlobalData.getInstance().setGlobalValue("1");
                 /*

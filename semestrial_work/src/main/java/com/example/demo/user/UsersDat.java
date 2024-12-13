@@ -6,7 +6,6 @@ import java.sql.*;
 
 public class UsersDat {
 
-    // Replace below database url, username and password with your actual database credentials
     private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/BOOKSTORE?useSSL=false";
     private static final String DATABASE_USERNAME = "semestralka";
     private static final String DATABASE_PASSWORD = "123456";
@@ -16,15 +15,32 @@ public class UsersDat {
     private static final String SELECT_QUERY_P = "SELECT * FROM user WHERE username = ? AND password = ?;";
     private static final String SELECT_ROLE = "SELECT * FROM user WHERE role = ? AND username = ?";
     private static final String CHANGE_ROLE = "UPDATE user SET role = '1' WHERE username = ?";
+    private static final String FIND_ID = "SELECT user_id FROM user WHERE username = ?";
+
+
+    public int FindId(String username) {
+        int id = -1;
+        try (Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(FIND_ID)) {
+
+            preparedStatement.setString(1, username);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                id = resultSet.getInt("user_id");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
 
 
     public void insertRecord(String username, String email, String password) throws SQLException {
-        // Step 1: Establishing a Connection and
-        // try-with-resource statement will auto close the connection.
         try (Connection connection = DriverManager
                 .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
 
-             // Step 2:Create a statement using connection object
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY)) {
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, password);
@@ -32,7 +48,6 @@ public class UsersDat {
             preparedStatement.setString(4, username);
 
             System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             // print SQL exception information
@@ -44,7 +59,6 @@ public class UsersDat {
         try (Connection connection = DriverManager
                 .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
 
-             // Step 2:Create a statement using connection object
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_QUERY)) {
             preparedStatement.setString(1, fullName);
 

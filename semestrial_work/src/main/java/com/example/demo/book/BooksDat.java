@@ -12,6 +12,28 @@ public class BooksDat {
     private static final String DATABASE_PASSWORD = "123456";
     private static final String INSERT_QUERY = "INSERT INTO book (title, author, isbn, available_copies) VALUES (?, ?, ?, ?)";
     private static final String SELECT_QUERY = "SELECT * FROM book WHERE title = ?";
+    private static final String FIND_ID = "SELECT book_id FROM book WHERE title = ?";
+    private static final String DECREASE = "UPDATE book SET available_copies = available_copies - 1 WHERE book_id = ?";
+
+
+    public int FindId(String title) {
+        int id = -1;
+        try (Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(FIND_ID)) {
+
+            preparedStatement.setString(1, title);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            // If a result is found, retrieve the book_id
+            if (resultSet.next()) {
+                id = resultSet.getInt("book_id");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
 
     public ArrayList<String> findBookByTitle(String title) {
         ArrayList<String> book = new ArrayList<>();
@@ -37,14 +59,13 @@ public class BooksDat {
         }
         return book;
     }
+
+
     public void insertRecord(String title, String author, String isbn, int available_copies) throws SQLException {
 
-        // Step 1: Establishing a Connection and
-        // try-with-resource statement will auto close the connection.
         try (Connection connection = DriverManager
                 .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
 
-             // Step 2:Create a statement using connection object
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY)) {
             preparedStatement.setString(1, title);
             preparedStatement.setString(2, author);
@@ -55,6 +76,21 @@ public class BooksDat {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             printSQLException(e);
+        }
+    }
+
+    public void Decrease(int id) {
+        try (Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(DECREASE)) {
+
+            // Set the parameters for the prepared statement
+            preparedStatement.setInt(1, id);     // Set the book_id to update
+
+            // Execute the update
+            preparedStatement.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

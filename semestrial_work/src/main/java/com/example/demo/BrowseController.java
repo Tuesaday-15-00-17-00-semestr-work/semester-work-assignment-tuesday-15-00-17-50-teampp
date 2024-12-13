@@ -2,6 +2,8 @@ package com.example.demo;
 
 import com.example.demo.book.Book;
 import com.example.demo.book.BooksDat;
+import com.example.demo.book.GlobalId;
+import com.example.demo.transactions.TransactionsDat;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class BrowseController {
@@ -29,6 +32,8 @@ public class BrowseController {
     private Label isbn;
     @FXML
     private Label available;
+    @FXML
+    private Label bought;
 
     String t, a;
     String value;
@@ -46,10 +51,37 @@ public class BrowseController {
         ArrayList<String> book = new ArrayList<>();
         book = dat.findBookByTitle(t);
 
-        author.setText(book.get(0));
-        isbn.setText(book.get(1));
-        available.setText(book.get(2));
+        if(book.isEmpty()){
+            bought.setText("No Book Found");
+        }
+        else {
+            bought.setText("Book Found");
+            author.setText(book.get(0));
+            isbn.setText(book.get(1));
+            available.setText(book.get(2));
+        }
+    }
 
+    public void buy (ActionEvent event) throws IOException, SQLException {
+        t = title.getText();
+
+        BooksDat dat = new BooksDat();
+        ArrayList<String> book = new ArrayList<>();
+        book = dat.findBookByTitle(t);
+
+        if(book.get(0) != null) {
+            if(Integer.parseInt(book.get(2)) > 0) {
+                int book_id = dat.FindId(t);
+                int user_id = GlobalId.getInstance().getGlobalId();
+                TransactionsDat transactionsDat = new TransactionsDat();
+                transactionsDat.insertTransaction(book_id, user_id, "Bought");
+                bought.setText("Successfully bought!");
+                dat.Decrease(book_id);
+            }
+            else{
+                bought.setText("Not available!");
+            }
+        }
 
     }
 
